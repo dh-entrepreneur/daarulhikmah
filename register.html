@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Pendaftaran</title>
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div>
+            <h3 class="navbar-title">Pendaftaran Santri</h3>
+        </div>
+        <div>
+            <a href="index.html">Home</a> 
+            <a href="about.html">About</a> 
+            <a href="contact.html">Contact</a> 
+        </div>
+    </nav>
+
+    <!-- Formulir -->
+    <div class="form-container">
+        <h2>Formulir Pendaftaran</h2>
+        <form id="daftarForm">
+            <input type="text" id="nama" name="nama" placeholder="Nama Lengkap" required>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <input type="text" id="alamat" name="alamat" placeholder="Alamat" required>
+            <input type="text" id="ttl" name="ttl" placeholder="Tempat, Tanggal Lahir" required>
+            <input type="text" id="nama_ibu" name="nama_ibu" placeholder="Nama Ibu" required>
+            <input type="text" id="nama_ayah" name="nama_ayah" placeholder="Nama Ayah" required>
+            <input type="text" id="no_wa_orang_tua" name="no_wa_orang_tua" placeholder="No WhatsApp Ibu/Ayah" required>
+            <input type="text" id="sekolah_asal" name="sekolah_asal" placeholder="Sekolah Asal" required>
+            <select id="pilihan" name="pilihan" required>
+                <option value="" disabled selected>Pilih jenjang pendidikan</option>
+                <option value="SMP">Masuk SMP</option>
+                <option value="SMA">Masuk SMA</option>
+            </select>
+            <textarea id="motivasi" name="motivasi" rows="4" placeholder="Motivasi masuk pesantren" required></textarea>
+            <button type="submit">Daftar</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("daftarForm").addEventListener("submit", function (e) {
+            e.preventDefault(); // Mencegah reload halaman
+            
+            // Ambil data dari formulir
+            const nama = document.getElementById("nama").value;
+            const email = document.getElementById("email").value;
+            const alamat = document.getElementById("alamat").value;
+            const ttl = document.getElementById("ttl").value;
+            const namaIbu = document.getElementById("nama_ibu").value;
+            const namaAyah = document.getElementById("nama_ayah").value;
+            const noWaOrangTua = document.getElementById("no_wa_orang_tua").value;
+            const sekolahAsal = document.getElementById("sekolah_asal").value;
+            const pilihan = document.getElementById("pilihan").value;
+            const motivasi = document.getElementById("motivasi").value;
+
+            // Format pesan yang akan dikirim ke WhatsApp
+            const pesan = `Halo! Saya ingin mendaftar menjadi santri:\n\n` +
+                `Nama Lengkap: ${nama}\n` +
+                `Email: ${email}\n` +
+                `Alamat: ${alamat}\n` +
+                `Tempat, Tanggal Lahir: ${ttl}\n` +
+                `Nama Ibu: ${namaIbu}\n` +
+                `Nama Ayah: ${namaAyah}\n` +
+                `No WhatsApp Ibu/Ayah: ${noWaOrangTua}\n` +
+                `Sekolah Asal: ${sekolahAsal}\n` +
+                `Pilihan: ${pilihan}\n` +
+                `Motivasi: ${motivasi}`;
+
+            // Nomor WhatsApp tujuan (ubah dengan nomor Anda, format internasional)
+            const nomorTujuan = "6281387905464"; // Contoh: 62 untuk Indonesia
+
+            // Buka aplikasi WhatsApp dengan data formulir
+            const url = `https://wa.me/${nomorTujuan}?text=${encodeURIComponent(pesan)}`;
+            window.open(url, "_blank");
+        });
+    </script>
+</body>
+</html>
